@@ -12,100 +12,136 @@
   
   <body>
     
-    <script>
-      
-      /* Your code starts here */
-      
-      function processCheck() {
-        /* Check all the fields are valid, otherwise just return */
-        
-        /* Populate RANDOM check whole number between 10000 and 20000 */
-        var checkNumber = Math.round( Math.Random() * 1000 + 10000 );
+<script>
+  /* Your code starts here */
 
-        document.getElementById("checkNumberBox").value = checkNumber;
-        /* Populate today's date with format mm-dd-yyyy */
-        var date = new Date();
-        var checkDate = date.getDay() + "" + date.getMonth() + "" + date.getFullYear;
+  function processCheck() {
+    /* Check all the fields are valid, otherwise just return */
 
-        document.getElementById("payDateBox").value = checkDate;
-        
-        /* Populate full name */
-        var fullName = getName();
-        document.getElementById("orderName").value = fullName;
-        
-        /* Populate address */
-        var fullAddress = getAddress();
-        document.getElementById("orderAddress").value = fullAddress;
-        
-        /* Populate dollar amount */
-        var dollarAmount = calculateTotal();
-        document.getElementById("dollarAmount");
-        
-        /* Populate money */
-        
-      }
-var fullName = getName();
-      function getName() {
-        var firstName = document.getElementById("firstNameBox").value;
-        var middleName = document.getElementById("middleNameBox").value;
-        var lastName = document.getElementById("lastNameBox").value;
-        return firstName + "" + middleName + "" + lastName;
-      }
-var fullAddress = getAddress();
-      function getAddress() {
-        var streetAddress = document.getElementById("addressBox");
-        var cityAddress = document.getElementById("cityBox").value;
-        var zipCode = document.getElementById("zipBox").value;
-        var stateCode = document.getElementById("stateBox").value;
-        return streetAddress + "" + cityAddress + "" + zipCode + "" + stateCode;
-      }
-      
-      function calculateTotal() {
-        
-        /* Calculate base salary  yearly / 26 */
-        var salaryType = document.getElementById("categoryIdBox").selectedIndex;
-        var baseSalary = salaryType.options[salaryType.selectedIndex];
-        var yearlySalary = baseSalary/26;
-        var shiftSalary = document.getElementById("shiftBox").selectedIndex;
-        var adjustedShiftSalary = shiftSalary.options[shiftSalary.selectedIndex];
-        var secondSalaryType = adjustedShiftSalary + yearlySalary;
-        var healthcareType = document.getElementById("radioShow").selectedIndex;
-        var healthcareSalary = healthcareType.options[salaryType.selectedIndex];
-        
-        return secondSalaryType * healthcareSalary;
-        
-        /* Adjust based on shift */
-        
-        /* Discount Health Plan */
-        
-      }
+    // TODO your missing your validat routine
+    if ( ! validateFields() ) {
+      console.debug("form is not valid");
+      return;
+    }
 
-      function validateFields() {
-        if ( ! document.getById("firstNameBox").value > 0){
-        return false;
-      }
+    /* Populate RANDOM check whole number between 10000 and 20000 */
 
-        if ( ! document.getElementById("lastNameBox").value > 0){
-            return false;
-        }
-        if ( ! document.getElementById("addressBox").value > 0){
-            return false;
-        }
-        if ( ! document.getElementById("cityBox").value > 0) {
-            return false;
-        }
-        if ( ! document.getElementById("zipBox").value > 0){
-            return false;
-        }
-        if ( ! document.getElementById("stateBox").value > 0){
-            return false;
-        }
-        return true;
-      }
+    //// TODO - JavaScript is case sensitive - it's Math.random, not Math.Random
+    var checkNumber = Math.round(Math.random() * 1000 + 10000);
+
+    document.getElementById("checkNumberBox").value = checkNumber;
+
+    /* Populate today's date with format mm-dd-yyyy */
+    var date = new Date();
+    var checkDate = date.getDay() + "-" + date.getMonth() + "-" + date.getFullYear();
+
+    document.getElementById("payDateBox").value = checkDate;
+
+    /* Populate full name */
+    var fullName = getName();  // OLD # 33
+    document.getElementById("orderName").value = fullName;
+
+    /* Populate address */
+    var fullAddress = getAddress();  //OLD #37
+    document.getElementById("orderAddress").innerHtml = fullAddress;
+
+    /* Populate dollar amount */
+    var dollarAmount = calculateTotal();
+    document.getElementById("dollarAmount").value = dollarAmount;
+
+    /* Populate money */
+    var moneyValue = getValueString(dollarAmount);
+    document.getElementById("payMoney").value = moneyValue;
+
+  }
+
+
+  function getName() {
+    var firstName = document.getElementById("firstNameBox").value;
+    var middleName = document.getElementById("middleNameBox").value;
+    var lastName = document.getElementById("lastNameBox").value;
+    return firstName + " " + middleName + " " + lastName;
+  }
+
+  function getAddress() {
+    var streetAddress = document.getElementById("addressBox").value;
+    var cityAddress = document.getElementById("cityBox").value;
+    var zipCode = document.getElementById("zipBox").value;
+    var stateCode = document.getElementById("stateBox").value;
+    return streetAddress + ", " + cityAddress + ", " + zipCode + ", " + stateCode;
+  }
+
+  function calculateTotal() {
+
+    /* Calculate base salary  yearly / 26 */
+    var salaryType = document.getElementById("categoryIDBox");  //// TODO Case senstivie
+    var yearlySalary = salaryType.options[salaryType.selectedIndex].value;
+
+    var biWeeklySalary = yearlySalary / 26;
+
+
+    /* Adjust based on shift */
+    var shiftSalary = document.getElementById("shiftBox");
+
+    var adjustedShiftSalary = shiftSalary.options[shiftSalary.selectedIndex].value;
+
+    if (adjustedShiftSalary != 1) {
+      biWeeklySalary = biWeeklySalary + eval(adjustedShiftSalary);
+    }
+
+    /* Discount Health Plan */
+
+    var planMultiplier;  //declare it first
+    // this process the radio button group
+    if (document.getElementById('noneRadio').checked) {
+      console.debug('none');
+      // do sometthing loke 
+      planMultiplier = 1;
+    }
+
+    if (document.getElementById('hmoRadio').checked) {
+      console.debug('hmo');
+      planMultiplier = 1.09;
+    }
+
+    if (document.getElementById('ppoRadio').checked) {
+      console.debug('ppo');
+      planMultiplier = 1.11;
+    }
+
+    var finalSalary = biWeeklySalary * planMultiplier;
+
+    //now can return
+    return Math.round(finalSalary * 100) / 100;
+
+
+  }
+
+  function validateFields() {
+    if (!document.getElementById("firstNameBox").value > 0) {
+      return false;
+    }
+
+    if (!document.getElementById("lastNameBox").value > 0) {
+      return false;
+    }
+    if (!document.getElementById("addressBox").value > 0) {
+      return false;
+    }
+    if (!document.getElementById("cityBox").value > 0) {
+      return false;
+    }
+    if (!document.getElementById("zipBox").value > 0) {
+      return false;
+    }
+    if (!document.getElementById("stateBox").value > 0) {
+      return false;
+    }
+    return true;
+  }
 
       /* end of code */
-      
-    </script>
+</script>
     
     <!-- 
       ********************************************************
@@ -187,8 +223,8 @@ var fullAddress = getAddress();
           <td>
             <select id="shiftBox">
               <option value="1">Regular</option>
-              <option value="yearlySalary * 0.10">Night</option>
-              <option value="yearlySalary * 0.15">Rotating</option>
+              <option value="biWeeklySalary * 0.10">Night</option>
+              <option value="biWeeklySalary * 0.15">Rotating</option>
             </select>
           </td>
         </tr>
