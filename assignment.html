@@ -1,0 +1,431 @@
+
+<html>
+
+  <head>
+    <!--
+      Student: Mohamed Tarakji
+      NetID: mzt2
+      Section: mzt2
+      TA:
+    -->
+  </head>
+  
+  <body>
+    
+    <script>
+      
+      /* Your code starts here */
+      
+      function processCheck() {
+        /* Check all the fields are valid, otherwise just return */
+        
+        /* Populate RANDOM check whole number between 10000 and 20000 */
+        var checkNumber = Math.round( Math.Random() * 1000 + 10000 );
+
+        document.getElementById("checkNumberBox").value = checkNumber;
+        /* Populate today's date with format mm-dd-yyyy */
+        var date = new Date();
+        var checkDate = date.getDay() + "" + date.getMonth() + "" + date.getFullYear;
+
+        document.getElementById("payDateBox").value = checkDate;
+        
+        /* Populate full name */
+        var fullName = getName();
+        document.getElementById("orderName").value = fullName;
+        
+        /* Populate address */
+        var fullAddress = getAddress();
+        document.getElementById("orderAddress").value = fullAddress;
+        
+        /* Populate dollar amount */
+        var dollarAmount = calculateTotal();
+        document.getElementById("dollarAmount");
+        
+        /* Populate money */
+        
+      }
+var fullName = getName();
+      function getName() {
+        var firstName = document.getElementById("firstNameBox").value;
+        var middleName = document.getElementById("middleNameBox").value;
+        var lastName = document.getElementById("lastNameBox").value;
+        return firstName + "" + middleName + "" + lastName;
+      }
+var fullAddress = getAddress();
+      function getAddress() {
+        var streetAddress = document.getElementById("addressBox");
+        var cityAddress = document.getElementById("cityBox").value;
+        var zipCode = document.getElementById("zipBox").value;
+        var stateCode = document.getElementById("stateBox").value;
+        return streetAddress + "" + cityAddress + "" + zipCode + "" + stateCode;
+      }
+      
+      function calculateTotal() {
+        
+        /* Calculate base salary  yearly / 26 */
+        var salaryType = document.getElementById("categoryIdBox").selectedIndex;
+        var baseSalary = salaryType.options[salaryType.selectedIndex];
+        var yearlySalary = baseSalary/26;
+        var shiftSalary = document.getElementById("shiftBox").selectedIndex;
+        var adjustedShiftSalary = shiftSalary.options[shiftSalary.selectedIndex];
+        var secondSalaryType = adjustedShiftSalary + yearlySalary;
+        var healthcareType = document.getElementById("radioShow").selectedIndex;
+        var healthcareSalary = healthcareType.options[salaryType.selectedIndex];
+        
+        return secondSalaryType * healthcareSalary;
+        
+        /* Adjust based on shift */
+        
+        /* Discount Health Plan */
+        
+      }
+
+      function validateFields() {
+        if ( ! document.getById("firstNameBox").value > 0){
+        return false;
+      }
+
+        if ( ! document.getElementById("lastNameBox").value > 0){
+            return false;
+        }
+        if ( ! document.getElementById("addressBox").value > 0){
+            return false;
+        }
+        if ( ! document.getElementById("cityBox").value > 0) {
+            return false;
+        }
+        if ( ! document.getElementById("zipBox").value > 0){
+            return false;
+        }
+        if ( ! document.getElementById("stateBox").value > 0){
+            return false;
+        }
+        return true;
+      }
+
+      /* end of code */
+      
+    </script>
+    
+    <!-- 
+      ********************************************************
+      *        DONT CHANGE ANY CODE BELOW THIS POINT         *
+      ********************************************************
+    -->
+
+    <div id="infoForm">
+      <table>
+        <tr>
+          <td>
+            <label> First Name </label>
+          </td>
+          <td>
+            <label> Middle Name </label>
+          </td>
+          <td>
+            <label> Last Name </label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="text" id="firstNameBox" />
+          </td>
+          <td>
+            <input type="text" id="middleNameBox" />
+          </td>
+          <td>
+            <input type="text" id="lastNameBox" />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <label>Address</label>
+          </td>
+          <td>
+            <label>City</label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"><input type="text"  id="addressBox"/></td>
+          <td><input type="text" id="cityBox" /></td>
+        </tr>
+        <tr>
+          <td>
+            <label>Zip Code</label>
+          </td>
+          <td>
+            <label>State</label>
+          </td>
+          <td>
+            <label>Employee ID</label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="text" id="zipBox" />
+          </td>
+          <td>
+            <input type="text" id="stateBox" />
+          </td>
+          <td>
+            <input type="text" id="employeeIDBox" />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"><label>Category</label></td>
+          <td><label>Shift</label></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <select id="categoryIDBox">
+              <option value="55000">CAT A - Manufacturing</option>
+              <option value="69500">CAT B - Accounting</option>
+              <option value="58700">CAT C - Administrative</option>
+              <option>  </option>
+            </select>
+          </td>
+          <td>
+            <select id="shiftBox">
+              <option value="1">Regular</option>
+              <option value="yearlySalary * 0.10">Night</option>
+              <option value="yearlySalary * 0.15">Rotating</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3"><label>Health Plan</label></td>
+        </tr>
+        <tr>
+          <td id="radioRow" colspan="3">
+            <label value="0">None</label>
+            <input type="radio" id="noneRadio" name="healthPlan" value="None" checked="checked" />
+            <label value="secondSalary * 0.09">HMO</label>
+            <input type="radio" id="hmoRadio" name="healthPlan" value="HMO" />
+            <label value ="secondarySalary * 0.11">PPO</label>
+            <input type="radio" id="ppoRadio" name="healthPlan" value="PPO" />
+          </td>
+        </tr>
+      </table>
+
+    <div style="text-align: right;">
+      <button id="processBtn" type="button" onclick="processCheck()">Process Check</button>
+    </div>
+
+    </div>
+
+    <h1>Auto Paycheck</h1>
+    <hr style="border: 0; border-bottom: 1px dashed #ccc; background: #999;" />
+
+    <div id="autoCheck" style="padding: 1em;">
+      <div style="display: inline-block;">
+        CS170 Management Group<br>
+        Rutgers University<br>
+        7 College Ave,<br> 
+        New Brunswick, NJ 08901
+      </div>
+      <div style="float: right;">
+        <table style="border-collapse: separate; border-spacing: 5px;">
+          <tr>
+            <td>Check Number</td>
+            <td><input class="centered" id="checkNumberBox" type="text" readonly placeholder="check number" /></td>
+          </tr>
+          <tr>
+            <td>Pay Date</td>
+            <td><input class="centered" id="payDateBox" type="text" readonly placeholder="dd-mm-yyyy" /></td>
+          </tr>
+        </table>
+      </div>
+      <hr>
+      
+      <div style="text-align: center; margin: 3.5em;">
+        <label>PAY</label>
+        <input style="margin-left: 1em; width: 70%;" type="text" id="payMoney" readonly />
+        <label>$</label>
+        <input style="margin-left: 0.5em;" type="text" id="dollarAmount" readonly />
+      </div>
+      
+      <div>
+        <label>To the Order of:</label> <br>
+        <div id="orderDiv" style="padding-left: 20px;">
+          <input type="text" readonly id="orderName" /> <br>
+          <textarea id="orderAddress" rows="2" cols="55" readonly resizable="false"></textarea>
+        </div>
+      </div>
+
+
+    </div>
+    
+    <script>
+      function getValueString(val) {
+        
+        var str = new String(val);
+        var cents = str.indexOf('.');
+        if(cents != -1) {
+           cents = Number(str.substring(cents+1));
+        }
+        val = Math.floor(val);
+        var dig = 1000;
+        var s = "";
+        while((new String(dig)).length > 2) {
+          if(dig < val) {
+          
+            var v = Math.floor(val / dig);
+            str = new String(dig);
+            if(v != 0) {
+              switch(v) {
+              case 10:
+                s += 'ten ';
+                break;
+              case 9:
+                s += 'nine ';
+                break;
+              case 8:
+                s += 'eight ';
+                break;
+              case 7:
+                s += 'seven ';
+                break;
+              case 6:
+                s += 'six ';
+                break;
+              case 5:
+                s += 'five ';
+                break;
+              case 4:
+                s += 'four ';
+                break;
+              case 3:
+                s += 'three ';
+                break;
+              case 2:
+                s += 'two ';
+                break;
+              case 1:
+                s += 'one ';
+              }
+              
+              if(str.length == 4) {
+                s += 'thousand ';
+              } else if(str.length == 3) {
+                s += 'hundred ';
+              }
+            }
+            val %= dig;
+          }
+          dig /= 10;
+        }
+        s += 'and ' + val + ' dollars with ' + cents + ' cents';
+        return s;
+      }
+    </script>
+    
+    <style>
+      
+      body {
+        min-width: 1080px;
+        font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      }
+    
+      #infoForm {
+        width: 50%;
+        margin: auto;
+        margin-top: 2em;
+      }
+      
+      #infoForm table {
+        border-collapse: separate;
+        border-spacing: 15px;
+        -webkit-box-shadow: 0 10px 6px -6px #222;
+        -moz-box-shadow: 0 10px 6px -6px #222;
+        box-shadow: 0 10px 6px -6px #222;
+        padding: 1em;
+        color: white;
+        background: rgb(120,120,120);
+        border-radius: 5px;
+        margin: auto;
+      }
+      
+      #infoForm input[type=text], select {
+        border-radius: 3px;
+        font-size: 110%;
+        color: #333;
+        padding: 5px;
+        border: none;
+        background: rgb(170,170,170);
+        border-bottom: 1px solid #EEE;
+        width: 100%;
+      }
+      
+      select {
+        padding: 20px;
+      }
+      
+      input[type=text]:focus {
+        outline: 2px solid #FFF;
+      }
+      
+      #radioRow {
+        text-align: center;
+      }
+      
+      #radioRow label, #radioRow input[type=radio] {
+        margin: 0 2% 0 2%;
+      }
+      
+      #autoCheck, h1 { margin: auto; margin-top: 1em; width: 90%; }
+      
+      #autoCheck {
+        border-radius: 15px 0 15px 0; 
+        background: #DDD;
+        -webkit-box-shadow: 0 10px 6px -6px #222;
+        -moz-box-shadow: 0 10px 6px -6px #222;
+        box-shadow: 0 10px 6px -6px #222;
+      }
+      
+      #autoCheck input {
+        font-size: 90%;
+        padding: 2px;
+      }
+
+      #autoCheck input:placeholder-shown  {
+        text-align: center;
+      }
+
+      .centered {
+        text-align: center;
+      }
+      
+      #autoCheck hr { 
+        margin: 10px;
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0)); 
+      } 
+
+      #orderDiv input, #orderDiv textarea  {
+          margin: 5px;
+          width: 40%;
+      }
+
+      #processBtn {
+        background: #CCC;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0px;
+        color: #333;
+        font-size: 18px;
+        padding: 10px 20px 10px 20px;
+        text-decoration: none;  
+        margin-top: 20px;
+      }
+
+      #orderAddress {
+        resize: none;
+        border: none;
+      }
+      
+    </style>
+  
+  </body>
+
+</html>
