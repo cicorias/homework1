@@ -18,11 +18,11 @@
   function processCheck() {
     /* Check all the fields are valid, otherwise just return */
 
-    // TODO your missing your validat routine
-    if ( ! validateFields() ) {
-      console.debug("form is not valid");
-      return;
-    }
+    // // TODO your missing your validat routine
+    // if ( ! validateFields() ) {
+    //   console.debug("form is not valid");
+    //   return;
+    // }
 
     /* Populate RANDOM check whole number between 10000 and 20000 */
 
@@ -77,7 +77,7 @@
     var salaryType = document.getElementById("categoryIDBox");  //// TODO Case senstivie
     var yearlySalary = salaryType.options[salaryType.selectedIndex].value;
 
-    var biWeeklySalary = yearlySalary / 26;
+    yearlySalary = yearlySalary / 26;
 
 
     /* Adjust based on shift */
@@ -86,7 +86,7 @@
     var adjustedShiftSalary = shiftSalary.options[shiftSalary.selectedIndex].value;
 
     if (adjustedShiftSalary != 1) {
-      biWeeklySalary = biWeeklySalary + eval(adjustedShiftSalary);
+      yearlySalary = yearlySalary + eval(adjustedShiftSalary);
     }
 
     /* Discount Health Plan */
@@ -109,7 +109,7 @@
       planMultiplier = 1.11;
     }
 
-    var finalSalary = biWeeklySalary * planMultiplier;
+    var finalSalary = yearlySalary * planMultiplier;
 
     //now can return
     return Math.round(finalSalary * 100) / 100;
@@ -223,8 +223,8 @@
           <td>
             <select id="shiftBox">
               <option value="1">Regular</option>
-              <option value="biWeeklySalary * 0.10">Night</option>
-              <option value="biWeeklySalary * 0.15">Rotating</option>
+              <option value="yearlySalary * 0.10">Night</option>
+              <option value="yearlySalary * 0.15">Rotating</option>
             </select>
           </td>
         </tr>
