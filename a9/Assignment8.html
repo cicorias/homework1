@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <!--
+            Student Name: Mohamed Tarakji   
+            NetID: mzt2
+            TA: Ramya
+            Section: 37
+        -->
+    </head>
+
+    <body>
+
+        <script>
+
+            /* YOUR CODE BELOW */
+
+            var studentNames = [
+            'Aanisah', 'Apple', 'Astrella Celeste', 'Liberty',
+            'Marquise', 'Ocean', 'Rocket', 'Rufus', 'Saffron Sahara',
+            'Sage Moonblood', 'Tallulah', 'Willow Camille Reign',
+            'Xia', 'Xolani', 'Yasmeen', 'Yakub', 'Zariel', 'Zanta'];
+
+            var grades = [];
+            var meanGrade = 0;
+            function generateGrades(){
+                grades = new Array(studentNames.length);
+
+                for (var currentGrade = 0; currentGrade < grades.length; currentGrade++) {
+                    grades[currentGrade] = ((Math.random() * 100) + 1).toFixed(0);
+                    //optimize - why loop through this array again?
+                    meanGrade = meanGrade + grades[currentGrade];
+                }
+
+                meanGrade = meanGrade / studentNames.length;
+            }
+
+            var totalPoints = 500;
+
+            function populateStudentsTable() {
+                var studentTable = document.getElementById('students');
+                var count = studentNames.length;
+                var text = "students";
+
+                // for each student name
+                for (var currentItem = 0; currentItem < studentNames.length; currentItem = currentItem + 1) {
+                    console.log('foo');
+                    var newRow = document.createElement("tr");
+                    newRow.innerHTML = "<td>" + studentNames[currentItem] + "</td><td>" + grades[currentItem]  + "</td" ;
+                    studentTable.appendChild(newRow);
+                }
+            }
+            // create the needed HTML elements and put something in them  
+
+
+            function addElement() {
+                var newDiv = document.createElement("div");
+                var newContent = document.createElement("p");
+                newContent.innerHTML = studentNames + "" + courseGrades;
+                newDiv.appendChild(newContent);
+            }
+                        
+
+            function computeStats() {
+
+                /* Calculate the mean */
+                var mean = getMean();
+
+                function getMean() {
+                    return meanGrade;
+                }
+
+                //var median = getMedian();
+                /* Extract median */
+
+
+                /* Compute Standard Deviation */
+
+
+                /* Calculate C+ grade */
+
+            }
+
+            /* END OF ASSIGNMENT CODE, PLEASE DO NOT MODIFY ANYTHING BELOW THIS POINT */
+
+        </script>
+
+        <table id="students">
+            <caption>Total Points: 500 </caption>
+            <tr>
+                <th>Student Name</th>
+                <th>Course Grade</th>
+            </tr>
+        </table>
+
+        <div id="stats">
+            <table id="statsTable">
+                <tr>
+                    <th>Mean</th>
+                    <th>Median</th>
+                    <th>Standard Deviation</th>
+                    <th>C+ Grade</th>
+                </tr>
+                <tr>
+                    <td><input id="meanBox" type="text" readonly /></td>
+                    <td><input id="medianBox" type="text" readonly /></td>
+                    <td><input id="sdBox" type="text" readonly /></td>
+                    <td><input id="cPlusBox" type="text" readonly /></td>
+                </tr>
+            </table>
+        </div>
+
+        <script>
+
+            
+
+            /* DO NOT MODIFY ANYTHIGN BELOW THIS POINT */
+
+            function init() {
+                generateGrades();
+                populateStudentsTable();
+                computeStats();
+            }
+
+            function sort(array) {
+                array.sort(function(a,b){return a-b})
+            }
+
+            init();
+
+        </script>
+
+        <style>
+            
+            body {
+                text-align: center;
+            }
+            
+            #students {
+                border: 1px solid #DDD;
+                border-radius: 10px;
+                padding:20px;
+                margin: 2em auto;
+            }
+
+            #studentName {
+                text-align: left;
+            }
+
+            .studentNameEven {
+                background: #d9d1e8;
+            }
+
+            #statsTable {
+                margin: auto;
+                border: 1px solid #DDD;
+                border-radius: 10px;
+                padding: 20px;
+            }
+
+            #statsTable input {
+                text-align: center;
+                border: none;
+                background: #EEE;
+            }
+
+        </style>
+
+    </body>
+
+</html>
+
+

@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <!--
+            Student Name: Mohamed Tarakji   
+            NetID: mzt2
+            TA: Ramya
+            Section: 37
+        -->
+    </head>
+
+    <body>
+
+        <script>
+
+            /* YOUR CODE BELOW */
+
+            var studentNames = [
+                'Aanisah', 'Apple', 'Astrella Celeste','Liberty',
+                'Marquise','Ocean','Rocket','Rufus', 'Saffron Sahara',
+                'Sage Moonblood', 'Tallulah', 'Willow Camille Reign',
+                'Xia','Xolani','Yasmeen','Yakub', 'Zariel','Zanta'];
+            
+            var grades = new Array(18);
+            grades[0] = courseGrade;
+            grades[1] = courseGrade;
+            grade[2] = courseGrade;
+            grade[3] = courseGrade;
+            grade[4] = courseGrade;
+            grade[5] = courseGrade;
+            grade[6] = courseGrade;
+            grade[7] = courseGrade;
+            grade[8] = courseGrade;
+            grade[9] = courseGrade;
+            grade[10] = courseGrade;
+            grade[11] = courseGrade;
+            grade[12] = courseGrade;
+            grade[13] = courseGrade;
+            grade[14] = courseGrade;
+            grade[15] = courseGrade;
+            grade[16] = courseGrade;
+            grade[17] = courseGrade;
+
+            var totalPoints = 500;
+
+            function generateGrades() {
+                // for each student
+            var studentGrades;
+                    // generate a grade and put it into grades array
+                    var courseGrade = (Math.random() * 4 + +10).toFixed(2);
+                    return courseGrade;
+            }
+
+            function populateStudentsTable() {
+                var count = studentNames.length;
+                var text = "students";
+               // for each student name
+               for (count = 0; count < 19; count++ ) {
+                   document.write(count);
+
+               }
+                   
+                   document.getElementById("div").innerHTML = text;
+
+            }
+     // create the needed HTML elements and put something in them  
+     
+     <div id="div"></div>
+     <p id="p"></p>  
+
+     document.body.onload = addElement;
+
+                function addElement() {
+                    var newDiv = document.createElement("div");
+                    var newContent = document.createElement("p");
+                    newContent.innerHTML = studentNames+ "" + courseGrades;
+                    newDiv.appendChild(newContent);
+                }
+            
+            }
+
+            function computeStats() {
+                
+                /* Calculate the mean */
+               var mean = getMean();
+
+               function getMean() {
+                   return /18 
+               } 
+               
+var median = getMedian();
+                /* Extract median */
+                function getMedian();
+
+               
+
+                /* Compute Standard Deviation */
+                
+
+                /* Calculate C+ grade */
+                
+            }
+
+            /* END OF ASSIGNMENT CODE, PLEASE DO NOT MODIFY ANYTHING BELOW THIS POINT */
+
+        </script>
+
+        <table id="students">
+            <caption>Total Points: 500 </caption>
+            <tr>
+                <th>Student Name</th>
+                <th>Course Grade</th>
+            </tr>
+        </table>
+
+        <div id="stats">
+            <table id="statsTable">
+                <tr>
+                    <th>Mean</th>
+                    <th>Median</th>
+                    <th>Standard Deviation</th>
+                    <th>C+ Grade</th>
+                </tr>
+                <tr>
+                    <td><input id="meanBox" type="text" readonly /></td>
+                    <td><input id="medianBox" type="text" readonly /></td>
+                    <td><input id="sdBox" type="text" readonly /></td>
+                    <td><input id="cPlusBox" type="text" readonly /></td>
+                </tr>
+            </table>
+        </div>
+
+        <script>
+
+            
+
+            /* DO NOT MODIFY ANYTHIGN BELOW THIS POINT */
+
+            function init() {
+                generateGrades();
+                populateStudentsTable();
+                computeStats();
+            }
+
+            function sort(array) {
+                array.sort(function(a,b){return a-b})
+            }
+
+            init();
+
+        </script>
+
+        <style>
+            
+            body {
+                text-align: center;
+            }
+            
+            #students {
+                border: 1px solid #DDD;
+                border-radius: 10px;
+                padding:20px;
+                margin: 2em auto;
+            }
+
+            #studentName {
+                text-align: left;
+            }
+
+            .studentNameEven {
+                background: #d9d1e8;
+            }
+
+            #statsTable {
+                margin: auto;
+                border: 1px solid #DDD;
+                border-radius: 10px;
+                padding: 20px;
+            }
+
+            #statsTable input {
+                text-align: center;
+                border: none;
+                background: #EEE;
+            }
+
+        </style>
+
+    </body>
+
+</html>
+
+
